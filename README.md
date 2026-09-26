@@ -6,7 +6,8 @@ This repository provides supplementary materials for MARS.
 
 The prototype runs on an Ultra96-V2 acting as the vehicle and a MacBook Pro acting as the RSU. The document illustrates the authentication and key-establishment procedure, credential refresh, and the subsequent encrypted application exchange.
 
-[View the proof-of-concept implementation](./Proof-of-concept implementation of MARS.pdf)
+
+[View the proof-of-concept implementation](./prototype.pdf)
 
 ## ProVerif Verification Summary
 
