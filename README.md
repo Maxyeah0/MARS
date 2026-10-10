@@ -13,4 +13,4 @@ The equivalence models assume uncompromised secrets and unchanged valid authoriz
 
 ## ProVerif Verification Summary
 
-![ProVerif verification summary](./PV-summary.png)
+![ProVerif verification summary](./PV_summary.png)
