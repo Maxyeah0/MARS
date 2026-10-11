@@ -26,14 +26,14 @@ fun HMAC(skey,bitstring):bitstring.
 fun kdfSK(skey,bitstring):skey.
 fun kdfK2(skey,bitstring):skey.
 fun credential(bitstring,skey,nonce):bitstring [data].
-fun auth1_data(bitstring,nonce,nonce,host):bitstring [data].
+fun auth1_data(bitstring,nonce,nonce,nonce,host):bitstring [data].
 fun nonce_to_bitstring(nonce):bitstring [data,typeConverter].
 fun host_to_bitstring(host):bitstring [data,typeConverter].
 
 let vehicle(v2r:channel,r2v:channel,done:channel,
             nIV:nonce,Ki:skey,Mi:bitstring)=
     new Ni:nonce; new ti:nonce;
-    let AM1=HMAC(Ki,auth1_data(Mi,ti,Ni,g)) in
+    let AM1=HMAC(Ki,auth1_data(Mi,ti,Ni,nIV,g)) in
     let M1=(Mi,ti,g,nIV,Ni,AM1) in
     out(c,M1); out(v2r,M1);
     in(r2v,(tj:nonce,Nj:nonce,AM2:bitstring));
@@ -57,7 +57,7 @@ let rsu(v2r:channel,r2v:channel,Kenc:skey)=
     in(v2r,(Mi:bitstring,ti:nonce,gIn:host,nIV:nonce,Ni:nonce,AM1:bitstring));
     if gIn=g then
     let credential(rho:bitstring,Ki:skey,texp:nonce)=aead_dec(Mi,Kenc,nIV) in
-    if AM1=HMAC(Ki,auth1_data(Mi,ti,Ni,g)) then
+    if AM1=HMAC(Ki,auth1_data(Mi,ti,Ni,nIV,g)) then
     new tj:nonce; new Nj:nonce; new nextNonce:nonce;
     let D=H7(Mi,nonce_to_bitstring(Ni),nonce_to_bitstring(Nj),
         nonce_to_bitstring(ti),nonce_to_bitstring(tj),
